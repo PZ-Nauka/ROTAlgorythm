@@ -8,9 +8,9 @@ lettersD = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
 numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
  
  
-def getEncIndex(in_array, begin_index):
+def getEncIndex(in_array, begin_index, encoding):
  
-  end_index = begin_index + ROT13
+  end_index = begin_index + encoding
   if end_index >= len(in_array):
     shift = end_index - (len(in_array) - 1)
     end_index = -1 + shift
@@ -18,9 +18,9 @@ def getEncIndex(in_array, begin_index):
   return end_index
  
  
-def crypt(in_array, sign):
+def crypt(in_array, sign, encoding):
   begin_index = in_array.index(sign)
-  end_index = getEncIndex(in_array, begin_index)
+  end_index = getEncIndex(in_array, begin_index, encoding)
   return in_array[end_index]
  
  
@@ -35,7 +35,7 @@ while 1 == 1:
       x+= "\n" + inp
   except EOFError:
     break
- 
+
  
 if x == "":
 	print(x)
@@ -43,11 +43,11 @@ if x == "":
  
 for i in x:
   if i in lettersU:
-    y += crypt(lettersU, i)
+    y += crypt(lettersU, i, ROT13)
   elif i in lettersD:
-    y += crypt(lettersD, i)
+    y += crypt(lettersD, i, ROT13)
   elif i in numbers:
-    y += crypt(numbers, i)
+    y += crypt(numbers, i, ROT5)
   else:
     y += i
  
